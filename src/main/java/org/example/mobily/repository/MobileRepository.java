@@ -18,7 +18,7 @@ public interface MobileRepository extends JpaRepository<MobilePhone, Long> {
 
     // جلب كل الموبايلات بشكل DTO
     @Query("SELECT new org.example.mobily.dto.MobileListDto(m.id, m.brand, m.name, m.rating, m.mainImage) FROM MobilePhone m")
-    List<MobileListDto> findAllMobileList();
+    Page<MobileListDto> findAllMobileList(Pageable pageable);
 
     // جلب الموبايلات حسب الماركة بشكل DTO مع Pagination
     @Query("SELECT new org.example.mobily.dto.MobileListDto(m.id, m.brand, m.name, m.rating, m.mainImage) " +

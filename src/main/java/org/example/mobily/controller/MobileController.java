@@ -40,9 +40,12 @@ public class MobileController {
         return ResponseEntity.ok(savedMobile);
     }
 
-    @GetMapping()
-    public ResponseEntity<List<MobileListDto>> getAllMobile() {
-        return ResponseEntity.ok(mobileService.getMobilePhoneList());
+    @GetMapping
+    public ResponseEntity<Page<MobileListDto>> getAllMobile(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        return ResponseEntity.ok(mobileService.getMobilePhoneList(page, size));
     }
 
     @GetMapping("/all1")

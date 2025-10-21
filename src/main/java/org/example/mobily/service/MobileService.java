@@ -15,7 +15,7 @@ public interface MobileService {
     MobilePhone addMobilePhone(MobilePhoneDTO mobilePhoneDTO, MultipartFile mainImage, MultipartFile[] images);
 
     List<MobilePhone> addMobilePhoneList(List<MobilePhone> mobilePhoneList);
-    List<MobileListDto> getMobilePhoneList();
+     Page<MobileListDto> getMobilePhoneList(int page, int size);
     List<MobilePhone> getMobilePhoneListALl();
 
     MobilePhone getMobilePhoneById(Long mobilePhoneId);

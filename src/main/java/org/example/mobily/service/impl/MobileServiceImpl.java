@@ -48,10 +48,9 @@ public class MobileServiceImpl implements MobileService {
 
         MobilePhone saved = mobileRepository.save(mobile);
 
-        // ✅ تحديث كاش 'all' بعد إضافة الهاتف
+        // ✅ مسح الكاش بالكامل بعد إضافة هاتف جديد
         if (cacheManager.getCache("mobiles") != null) {
-            List<MobileListDto> allMobiles = mobileRepository.findAllMobileList();
-            cacheManager.getCache("mobiles").put("all", allMobiles);
+            cacheManager.getCache("mobiles").clear();
         }
 
         return saved;
@@ -64,9 +63,10 @@ public class MobileServiceImpl implements MobileService {
     }
 
     @Override
-    @Cacheable(value = "mobiles", key = "'all'")
-    public List<MobileListDto> getMobilePhoneList() {
-        return mobileRepository.findAllMobileList();
+    @Cacheable(value = "mobiles", key = "'page_' + #page + '_size_' + #size")
+    public Page<MobileListDto> getMobilePhoneList(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return mobileRepository.findAllMobileList(pageable);
     }
 
     @Override
