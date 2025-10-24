@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/brands")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 public class MobileBrandDetailsController {
 
